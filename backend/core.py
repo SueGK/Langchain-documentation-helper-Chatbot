@@ -1,10 +1,11 @@
 import os
-from typing import Any
+from typing import Any, List, Dict
 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
-from langchain.chains import RetrievalQA
+from langchain.chains import ConversationalRetrievalChain
 from langchain.vectorstores import Pinecone
+import pinecone
 
 from consts import INDEX_NAME
 
@@ -13,21 +14,20 @@ pinecone.init(
     environment=os.environ["PINECONE_ENVIRONMENT_REGION"],
 )
 
-def run_llm(query: str) -> Any:
-    """Run LLM on query and return answer"""
+
+def run_llm(query: str, chat_history: List[Dict[str, Any]] = []) -> Any:
     embeddings = OpenAIEmbeddings()
     docsearch = Pinecone.from_existing_index(
         index_name=INDEX_NAME, embedding=embeddings
-        )
-    retriever = docsearch.as_retriever()
-    qa = RetrievalQA.from_chain_type(
-        llm=ChatOpenAI(temperature=0, verbose=True),
-        chain_type="stuff",
-        retriever=retriever
     )
-    return qa.run({"query": query})
+    chat = ChatOpenAI(verbose=True, temperature=0)
+
+    qa = ConversationalRetrievalChain.from_llm(
+        llm=chat, retriever=docsearch.as_retriever(), return_source_documents=True
+    )
+
+    return qa({"question": query, "chat_history": chat_history})
+
 
 if __name__ == "__main__":
-    print(run_llm("What is Langchain?"))
-
-
+    print(run_llm(query="What is LangChain?"))

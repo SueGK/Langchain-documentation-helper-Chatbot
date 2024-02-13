@@ -20,6 +20,7 @@ streamlit-chat = "*"
 tqdm = "*"
 
 [dev-packages]
+ruff = "*"
 
 [requires]
 python_version = "3.11"
