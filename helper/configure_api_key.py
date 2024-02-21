@@ -1,7 +1,5 @@
 import streamlit as st
 
-import streamlit as st
-
 def configure_api_key(key_name, default_value=""):
     """
     Checks if a key is present in the session state. If not, sets a default value
@@ -22,10 +20,3 @@ def configure_api_key(key_name, default_value=""):
         with st.container():
             st.warning(warning_message)
 
-
-def pretty_print_docs(docs):
-    print(
-        f"\n{'-' * 100}\n".join(
-            [f"Document {i+1}:\n\n" + d.page_content for i, d in enumerate(docs)]
-        )
-    )
