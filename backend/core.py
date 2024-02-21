@@ -25,7 +25,7 @@ def run_llm(model: str, query: str, chat_history: List[Dict[str, Any]] = []) -> 
     Returns:
         Any: The result of the conversational retrieval chain invocation.
     """
-    embeddings = OpenAIEmbeddings(st.session_state["OPENAI_API_KEY"])
+    embeddings = OpenAIEmbeddings()
     docsearch = Pinecone.from_existing_index(
         index_name=INDEX_NAME, embedding=embeddings
     )
