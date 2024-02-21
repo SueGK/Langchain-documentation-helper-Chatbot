@@ -2,8 +2,8 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import ReadTheDocsLoader
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import Pinecone
-from consts import INDEX_NAME, LANGCHAIN_DOCS_PATH
 
+from consts import INDEX_NAME, LANGCHAIN_DOCS_PATH
 
 vectorstore = Pinecone.from_existing_index(
     index_name=INDEX_NAME, embedding=OpenAIEmbeddings()

@@ -1,7 +1,7 @@
-from backend.core import run_llm, create_sources_string
-from helper.API import configure_api_key
 import streamlit as st
 
+from backend.core import create_sources_string, run_llm
+from helper.API import configure_api_key
 
 st.set_page_config(page_title="Docs Helper", layout="wide")
 

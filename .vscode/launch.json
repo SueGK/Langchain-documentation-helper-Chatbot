@@ -9,7 +9,7 @@
             "name": "Python Debugger: Current File",
             "type": "debugpy",
             "request": "launch",
-            // use pipenv --venv to get the path
+            // use pipenv --venv to change the path
             "program": "PATH/TO/VENV/bin/streamlit",
             "console": "integratedTerminal",
             "justMyCode": true,
