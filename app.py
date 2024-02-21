@@ -1,10 +1,18 @@
 from backend.core import run_llm, create_sources_string
+from helper import configure_api_key
 import streamlit as st
 
 
 st.set_page_config(page_title="Docs Helper", layout="wide")
 
 st.title("🤠 Langchain Documentation Helper Bot")
+
+# configure API
+# Configure API keys with automatic warning messages
+configure_api_key("OPENAI_API_KEY")
+configure_api_key("PINECONE_API_KEY")
+configure_api_key("PINECONE_ENVIRONMENT")
+
 
 # configure session state
 if "openai_model" not in st.session_state:
