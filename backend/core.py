@@ -9,6 +9,10 @@ from langchain_pinecone import Pinecone
 from consts import INDEX_NAME
 import streamlit as st
 
+os.environ["OPENAI_API_KEY"] = st.session_state["OPENAI_API_KEY"]
+os.environ["PINECONE_API_KEY"] = st.session_state["PINECONE_API_KEY"]
+os.environ["PINECONE_ENVIRONMENT_REGION"] = st.session_state["PINECONE_ENVIRONMENT_REGION"]
+
 def run_llm(model: str, query: str, chat_history: List[Dict[str, Any]] = []) -> Any:
     """
     A function that runs a conversational retrieval chain using OpenAI embeddings and Pinecone for document search.
