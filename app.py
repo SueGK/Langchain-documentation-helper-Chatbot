@@ -1,5 +1,5 @@
 from backend.core import run_llm, create_sources_string
-from helper import configure_api_key
+from helper.API import configure_api_key
 import streamlit as st
 
 
