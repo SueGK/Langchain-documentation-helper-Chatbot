@@ -7,7 +7,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import Pinecone
 from consts import INDEX_NAME
-
+import streamlit as st
 
 def run_llm(model: str, query: str, chat_history: List[Dict[str, Any]] = []) -> Any:
     """
@@ -21,7 +21,7 @@ def run_llm(model: str, query: str, chat_history: List[Dict[str, Any]] = []) -> 
     Returns:
         Any: The result of the conversational retrieval chain invocation.
     """
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(st.session_state["OPENAI_API_KEY"])
     docsearch = Pinecone.from_existing_index(
         index_name=INDEX_NAME, embedding=embeddings
     )
