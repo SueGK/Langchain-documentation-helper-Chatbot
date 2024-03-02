@@ -1,0 +1,11 @@
+langchain
+tiktoken
+openai
+pinecone-client
+uvicorn
+streamlit
+langchain-community
+langchain-pinecone
+langchain-openai
+
+
