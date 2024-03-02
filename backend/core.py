@@ -1,5 +1,6 @@
 from typing import Any, List, Dict, Set
-
+import os
+import streamlit as st
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
@@ -14,6 +15,10 @@ configure_api_key("OPENAI_API_KEY")
 configure_api_key("PINECONE_API_KEY")
 configure_api_key("PINECONE_ENVIRONMENT")
 
+os.environ["OPENAI_API_KEY"] = st.session_state["OPENAI_API_KEY"]
+os.environ["PINECONE_API_KEY"] = st.session_state["PINECONE_API_KEY"]
+os.environ["PINECONE_ENVIRONMENT_REGION"] = st.session_state["PINECONE_ENVIRONMENT_REGION"]
+
 def run_llm(model: str, query: str, chat_history: List[Dict[str, Any]] = []) -> Any:
     """
     A function that runs a conversational retrieval chain using OpenAI embeddings and Pinecone for document search.
@@ -26,7 +31,7 @@ def run_llm(model: str, query: str, chat_history: List[Dict[str, Any]] = []) -> 
     Returns:
         Any: The result of the conversational retrieval chain invocation.
     """
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(openai_api_key=st.session_state["OPENAI_API_KEY"])
     docsearch = Pinecone.from_existing_index(
         index_name=INDEX_NAME, embedding=embeddings
     )
