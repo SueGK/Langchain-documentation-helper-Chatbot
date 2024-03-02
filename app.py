@@ -3,8 +3,6 @@ import streamlit as st
 from backend.core import create_sources_string, run_llm
 from helper.API import configure_api_key
 
-st.set_page_config(page_title="Docs Helper", layout="wide")
-
 st.title("🤠 Langchain Documentation Helper Bot")
 
 # configure API

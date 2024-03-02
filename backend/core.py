@@ -1,4 +1,3 @@
-import os
 from typing import Any, List, Dict, Set
 
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -6,12 +5,14 @@ from langchain_openai import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import Pinecone
-from consts import INDEX_NAME
-import streamlit as st
 
-os.environ["OPENAI_API_KEY"] = st.session_state["OPENAI_API_KEY"]
-os.environ["PINECONE_API_KEY"] = st.session_state["PINECONE_API_KEY"]
-os.environ["PINECONE_ENVIRONMENT_REGION"] = st.session_state["PINECONE_ENVIRONMENT_REGION"]
+from consts import INDEX_NAME
+from helper.API import configure_api_key
+
+# Configure API keys with automatic warning messages
+configure_api_key("OPENAI_API_KEY")
+configure_api_key("PINECONE_API_KEY")
+configure_api_key("PINECONE_ENVIRONMENT")
 
 def run_llm(model: str, query: str, chat_history: List[Dict[str, Any]] = []) -> Any:
     """
